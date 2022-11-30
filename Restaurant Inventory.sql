@@ -1,13 +1,5 @@
-/* 
-IS620_Team2
-Will_Bundesen
-Sara_Khanjani
-Tolulope_Ale
-Yogichandar_Boppana
-David_Calderone
-*/
 SET SERVEROUTPUT ON;
---#####FOR THE PRESENTATION the DROPs should be commented out, says Prof  -Will#####
+--#####--------------------#####
 DROP SEQUENCE seq_cusine;
 DROP SEQUENCE seq_Res;
 DROP SEQUENCE menuID_seq;
@@ -21,7 +13,7 @@ DROP FUNCTION FIND_RESTAURANT_ID;
 DROP FUNCTION FIND_WAITER_ID;
 DROP FUNCTION FIND_CUSTOMER_ID;
 
---dropping all the PROCEDUREs that are used in the code as part of waiter’s table
+--dropping all the PROCEDUREs that are used in the code as part of waiterâ€™s table
 DROP PROCEDURE details_of_waiter;
 DROP PROCEDURE hire_a_waiter;
 DROP PROCEDURE tip_by_state;
@@ -102,7 +94,6 @@ END;
 /
 SELECT * FROM Restaurant_t WHERE cuisineID = 3;
 
---TEAM MEMBER 4 Tolulope Ale
 --Function to call the restaurant ID from the restaurant table
 CREATE OR REPLACE FUNCTION FIND_RESTAURANT_ID (resNAME varchar2) 
 RETURN INT
@@ -121,7 +112,6 @@ BEGIN
 END;
 /
 
---Member 2 Yogichandar Boppana
 --creating a sequence to automatically update the waiter id in the waiter table
 create sequence waiter_id_seq start with 10 increment by 1;
 
@@ -203,7 +193,6 @@ END;
 /
 SELECT * FROM waiter_t WHERE Rest_ID = 7;
 
---TEAM MEMBER 3 David Calderone
 --creating a SEQUENCE to create menuID
 CREATE SEQUENCE menuID_seq START WITH 1 MINVALUE 1
 INCREMENT BY 1;
@@ -223,9 +212,6 @@ CREATE TABLE RESTAURANT_INVENTORY_T(
 	FOREIGN KEY (menuID) references MENU_ITEMS_T(menuID),
 	FOREIGN KEY (restaurantInvID) references RESTAURANT_T (Rest_ID));
 
---END of Team Member 3 - David Calderone
-
---TEAM MEMBER 4 Tolulope Ale
 --function to call the menu ID from the menu table
 CREATE OR REPLACE FUNCTION FIND_MENU_ITEM_ID (meNAME varchar2) 
 RETURN INT
@@ -244,7 +230,6 @@ BEGIN
 END;
 /
 
-/*TEAM MEMBER 3 David Calderone*/
 /*finding the cuisine ID by taking in a cuisine Name and returning the ID */
 CREATE OR REPLACE FUNCTION FIND_CUISINE_TYPE_ID(cuisineLook varchar) return INT
 AS
@@ -295,7 +280,6 @@ EXEC menu_items_insert('meat chunks', 12, 'Ethiopian');
 EXEC menu_items_insert('legume stew', 10, 'Ethiopian');
 EXEC menu_items_insert('flatbread', 3, 'Ethiopian');
 
-/*MORE TEAM MEMBER 3 David Calderone*/
 /*PROCEDURE to INSERT INTO the RESTAURANT_INVENTORY_T tables by passing insert parameter*/
 CREATE OR REPLACE PROCEDURE RESTAURANT_INVENTORY_Insert(restaurantQuantityInsert INT, menuNameInsert varchar, Rest_NameCheck varchar)
 AS
@@ -329,9 +313,6 @@ EXEC RESTAURANT_INVENTORY_Insert(150, 'meat chunks', 'Ethiop');
 EXEC RESTAURANT_INVENTORY_Insert(150, 'legume stew', 'Ethiop');
 EXEC RESTAURANT_INVENTORY_Insert(500, 'flatbread', 'Ethiop');
 
---END of Team Member 3 - David Calderone
-
---Team Member 5 Will_Bundesen
 --create a sequence for the Customers_T table
 CREATE SEQUENCE seq_customers
 MINVALUE 1
@@ -364,7 +345,6 @@ INSERT INTO Customers_T VALUES (seq_customers.nextval, 'CustPA4', 'rwang@outlook
 INSERT INTO Customers_T VALUES (seq_customers.nextval, 'CustPA5', 'mewart@hotmail.com', '6 Sand Hill Rd', 'Minneapolis', 'PA', 16822, 8699172031701283);
 INSERT INTO Customers_T VALUES (seq_customers.nextval, 'CustPA6', 'pahearn@yahoo.com', '1601 Nicollet Ave', 'Bellevue', 'PA', 16822, 3598902434108253);
 
---TEAM MEMBER 4 Tolulope Ale
 --function to call the customer ID from the customers table
 CREATE OR REPLACE FUNCTION FIND_CUSTOMER_ID (custNAME varchar2) 
 RETURN INT
@@ -414,7 +394,6 @@ INSERT INTO ORDERS_T VALUES(orderID_seq.nextval, FIND_RESTAURANT_ID('Ethiop'), F
 INSERT INTO ORDERS_T VALUES(orderID_seq.nextval, FIND_RESTAURANT_ID('Ethiop'), FIND_CUSTOMER_ID('CustPA2'), FIND_MENU_ITEM_ID('legume stew'), FIND_WAITER_ID('Trevor'), date '2022-05-01', 100.00, 20.00);  
 INSERT INTO ORDERS_T VALUES(orderID_seq.nextval, FIND_RESTAURANT_ID('Ethiop'), FIND_CUSTOMER_ID('CustPA2'), FIND_MENU_ITEM_ID('legume stew'), FIND_WAITER_ID('Trevor'), date '2022-05-11', 100.00, 20.00);    
 
---Team Member 3 - David Calderone
 --PROCEDURE to Update Menu Item Inventory
 --Takes in restaurant ID, menu item ID, and how much to reduce it by
 
@@ -452,18 +431,15 @@ END;
 /
 SELECT * from RESTAURANT_INVENTORY_T where restaurantInvID = FIND_RESTAURANT_ID('Ethiop');
 
---END of Team Member 3 - David Calderone
-
 BEGIN
 dbms_output.put_line('
 ----------------------------R E P O R T S   below ----------------------------');
 END;
 /
 
---Team Member 1 Sara_Khanjani
 BEGIN
 dbms_output.put_line('
------------------------- REPORT BY MEMBER 1 (Sara_Khanjani) --------------------
+------------------------ REPORT --------------------
 ');  
 END;
 /
@@ -493,10 +469,9 @@ END;
 /
 EXEC income_report;
 
---Team Member 2 Yogichandar_Boppana
 BEGIN
 dbms_output.put_line('
---------------------- REPORTS BY MEMBER 2 (Yogichandar_Boppana) ----------------
+--------------------- REPORTS ----------------
 ');
 END;
 /
@@ -591,7 +566,7 @@ EXEC tip_by_state;
 --Team Member 3 David_Calderone
 BEGIN
 dbms_output.put_line('
---------------------- REPORT BY MEMBER 3 (David_Calderone) ---------------------
+--------------------- REPORT ---------------------
 ');
 END;
 /
@@ -663,12 +638,10 @@ END;
 /
 EXEC Report_Menu_Items('Indian');
 
---END of David's code
 
---Team Member 4 TOLULOPE_ALE
 BEGIN
 dbms_output.put_line('
---------------------- REPORT BY MEMBER 4 (Tolulope_Ale) ------------------------
+--------------------- REPORT ------------------------
 ');
 END;
 /
@@ -744,7 +717,7 @@ END;
 EXEC list_pop_menu('BBQ');
 
 --Report showing the top 3 restaurants of each state. 
---The ranking is based on the total of ‘amount paid’ per restaurant per state. 
+--The ranking is based on the total of â€˜amount paidâ€™ per restaurant per state. 
 
 create or replace procedure restState(reState in varchar)
 as
@@ -799,13 +772,10 @@ END;
 /
 EXEC restState('PA');
 
---TEAM MEMBER 4 ENDS
 
-
---Team Member 5 Will_Bundesen
 BEGIN
 dbms_output.put_line('
---------------------- REPORTS BY MEMBER 5 (Will_Bundesen) -----------------------
+--------------------- REPORTS -----------------------
 ');
 END;
 /
